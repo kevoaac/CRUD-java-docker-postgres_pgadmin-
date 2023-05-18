@@ -67,10 +67,13 @@ public class Producto {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("nombre: ")
+		sb.append("[ Nombre: ")
 		.append(nombre)
-		.append("precio: ")
-		.append(precio);
+		.append(" | ")
+		.append(" Precio: ")
+		.append(precio)
+		.append(" ]");
+		
 		return sb.toString();
 	}
 
