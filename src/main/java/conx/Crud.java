@@ -128,12 +128,13 @@ public class Crud {
 		String sql = null;
 		estadoOP = false;
 		connection = obtenerConexion();
-		connection.setAutoCommit(false);
 		
-		sql = "UPDATE productos SET nombre=?, tipo=?, cantidad=?, precio=? WHERE id =?";
-		sentencia = connection.prepareStatement(sql);
-
+		
 		try {
+			connection.setAutoCommit(false);//Evitar errores en la conexion
+			sql = "UPDATE productos SET nombre=?, tipo=?, cantidad=?, precio=? WHERE id =?";
+			sentencia = connection.prepareStatement(sql);
+			
 			sentencia.setString(1, p.getNombre());
 			sentencia.setString(2, p.getTipo());
 			sentencia.setInt(3, p.getCantidad());
@@ -150,9 +151,35 @@ public class Crud {
 		connection.commit();
 		sentencia.close();
 		connection.close();
-		
+
 		return true;
 	}	
+
+	public boolean eliminar(int id) throws SQLException {
+		
+		String sql = null;
+		estadoOP = false;
+		connection = obtenerConexion();
+
+		
+		try {
+			connection.setAutoCommit(false);
+			sql = "DELETE FROM productos WHERE id =?";
+			sentencia = connection.prepareStatement(sql) ;
+
+			sentencia.setInt(1, id);
+		} catch (SQLException e) {
+			connection.rollback();
+			e.printStackTrace();
+		}
+
+		estadoOP = sentencia.executeUpdate()>0;
+		connection.commit();
+		sentencia.close();
+		connection.close();
+
+		return estadoOP;
+	}
 
 	
 

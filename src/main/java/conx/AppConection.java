@@ -32,5 +32,14 @@ public class AppConection {
 		// for (Producto producto : miLista) {
 		// 	System.out.println(miLista);
 		// }
+
+
+        //UPDATE:
+        // c.actualizar(15, new Producto(0, "Yogurth", "Lacteo", 32, 2.70));
+
+
+        //DELETE:
+        // c.eliminar(15);
+
     }
 }
